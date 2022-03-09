@@ -77,11 +77,22 @@ namespace XNodeEditor {
                 NodeEditorGUILayout.PropertyField(iterator, true);
             }
 #endif
-
-            // Iterate through dynamic ports and draw them in the order in which they are serialized
-            foreach (XNode.NodePort dynamicPort in target.DynamicPorts) {
-                if (NodeEditorGUILayout.IsDynamicPortListPort(dynamicPort)) continue;
-                NodeEditorGUILayout.PortField(dynamicPort);
+            if (target.GetType().HasSortedOutputNodes())
+            {
+                var ports = target.DynamicPorts.ToList().OrderBy(e => e.fieldName);
+                foreach (var port in ports)
+                {
+                    NodeEditorGUILayout.PortField(port);
+                }
+            }
+            else
+            {
+                // Iterate through dynamic ports and draw them in the order in which they are serialized
+                foreach (XNode.NodePort dynamicPort in target.DynamicPorts)
+                {
+                    if (NodeEditorGUILayout.IsDynamicPortListPort(dynamicPort)) continue;
+                    NodeEditorGUILayout.PortField(dynamicPort);
+                }
             }
 
             serializedObject.ApplyModifiedProperties();

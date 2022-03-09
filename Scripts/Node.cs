@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -386,6 +386,11 @@ namespace XNode {
             public NodeWidthAttribute(int width) {
                 this.width = width;
             }
+        }
+
+        public class OutputPortsSortedAttribute : Attribute
+        {
+
         }
 #endregion
 

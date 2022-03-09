@@ -44,6 +44,12 @@ namespace XNodeEditor {
             return nodeWidth.TryGetValue(nodeType, out width);
         }
 
+        /// <summary> Get custom node widths defined with [NodeWidth(width)] </summary>
+        public static bool HasSortedOutputNodes(this Type nodeType)
+        {
+            return nodeType.GetCustomAttribute<XNode.Node.OutputPortsSortedAttribute>() != null;
+        }
+
         private static void CacheAttributes<V, A>(ref Dictionary<Type, V> dict, Func<A, V> getter) where A : Attribute {
             dict = new Dictionary<Type, V>();
             for (int i = 0; i < nodeTypes.Length; i++) {
