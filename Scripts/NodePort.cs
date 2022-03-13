@@ -116,9 +116,9 @@ namespace XNode {
 
         /// <summary> Return the output value of this node through its parent nodes GetValue override method. </summary>
         /// <returns> <see cref="Node.GetValue(NodePort)"/> </returns>
-        public object GetOutputValue() {
+        public object GetOutputValue(NodePort callerPort) {
             if (direction == IO.Input) return null;
-            return node.GetValue(this);
+            return node.GetValue(this, callerPort);
         }
 
         /// <summary> Return the output value of the first connected port. Returns null if none found or invalid.</summary>
@@ -126,7 +126,7 @@ namespace XNode {
         public object GetInputValue() {
             NodePort connectedPort = Connection;
             if (connectedPort == null) return null;
-            return connectedPort.GetOutputValue();
+            return connectedPort.GetOutputValue(this);
         }
 
         /// <summary> Return the output values of all connected ports. </summary>
@@ -140,7 +140,7 @@ namespace XNode {
                     i--;
                     continue;
                 }
-                objs[i] = connectedPort.GetOutputValue();
+                objs[i] = connectedPort.GetOutputValue(this);
             }
             return objs;
         }

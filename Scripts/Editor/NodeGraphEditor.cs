@@ -188,7 +188,7 @@ namespace XNodeEditor {
             string tooltip = "";
             tooltip = portType.PrettyName();
             if (port.IsOutput) {
-                object obj = port.node.GetValue(port);
+                object obj = port.node.GetValue(port, null);
                 tooltip += " = " + (obj != null ? obj.ToString() : "null");
             }
             return tooltip;
