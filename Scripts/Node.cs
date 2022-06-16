@@ -133,6 +133,9 @@ namespace XNode {
         /// <summary> Initialize node. Called on enable. </summary>
         protected virtual void Init() { }
 
+        /// <summary> Called when node is from a duplication. </summary>
+        public virtual void Duplicated() { }
+
         /// <summary> Checks all connections for invalid references, and removes them. </summary>
         public void VerifyConnections() {
             foreach (NodePort port in Ports) port.VerifyConnections();

@@ -468,6 +468,7 @@ namespace XNodeEditor {
                 XNode.Node newNode = graphEditor.CopyNode(srcNode);
                 substitutes.Add(srcNode, newNode);
                 newNode.position = srcNode.position + offset;
+                newNode.Duplicated();
                 newNodes[i] = newNode;
             }
 
