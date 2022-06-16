@@ -390,6 +390,17 @@ namespace XNode {
             }
         }
 
+        [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+        public class NodeTextWidthAttribute : Attribute
+        {
+            public int width;
+
+            public NodeTextWidthAttribute(int width)
+            {
+                this.width = width;
+            }
+        }
+
         public class OutputPortsSortedAttribute : Attribute
         {
 

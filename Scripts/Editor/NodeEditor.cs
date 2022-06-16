@@ -31,6 +31,10 @@ namespace XNodeEditor {
 #if ODIN_INSPECTOR
             inNodeEditor = true;
 #endif
+            if (NodeEditorReflection.TryGetAttributeTextWidth(target.GetType(), out var width) == false)
+                width = 100;
+
+            EditorGUIUtility.labelWidth = width;
 
             // Unity specifically requires this to save/update any serial object.
             // serializedObject.Update(); must go at the start of an inspector gui, and
@@ -115,6 +119,14 @@ namespace XNodeEditor {
             int width;
             if (type.TryGetAttributeWidth(out width)) return width;
             else return 208;
+        }
+
+        public virtual int GetTextWidth()
+        {
+            Type type = target.GetType();
+            int width;
+            if (type.TryGetAttributeTextWidth(out width)) return width;
+            else return 100;
         }
 
         /// <summary> Returns color for target node </summary>

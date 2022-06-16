@@ -11,6 +11,7 @@ namespace XNodeEditor {
     public static class NodeEditorReflection {
         [NonSerialized] private static Dictionary<Type, Color> nodeTint;
         [NonSerialized] private static Dictionary<Type, int> nodeWidth;
+        [NonSerialized] private static Dictionary<Type, int> nodeTextWidth;
         /// <summary> All available node types </summary>
         public static Type[] nodeTypes { get { return _nodeTypes != null ? _nodeTypes : _nodeTypes = GetNodeTypes(); } }
 
@@ -42,6 +43,15 @@ namespace XNodeEditor {
                 CacheAttributes<int, XNode.Node.NodeWidthAttribute>(ref nodeWidth, x => x.width);
             }
             return nodeWidth.TryGetValue(nodeType, out width);
+        }
+
+        public static bool TryGetAttributeTextWidth(this Type nodeType, out int width)
+        {
+            if (nodeTextWidth == null)
+            {
+                CacheAttributes<int, XNode.Node.NodeTextWidthAttribute>(ref nodeTextWidth, x => x.width);
+            }
+            return nodeTextWidth.TryGetValue(nodeType, out width);
         }
 
         /// <summary> Get custom node widths defined with [NodeWidth(width)] </summary>
