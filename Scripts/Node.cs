@@ -223,7 +223,9 @@ namespace XNode {
         public bool HasPort(string fieldName) {
             return ports.ContainsKey(fieldName);
         }
-#endregion
+        #endregion
+
+        public virtual bool HasValueSet => false;
 
 #region Inputs/Outputs
         /// <summary> Return input value for a specified port. Returns fallback value if no ports are connected </summary>
@@ -249,7 +251,27 @@ namespace XNode {
         /// <param name="port">The requested ports connected calling port.</param>
         public virtual object GetValue(NodePort port, NodePort callerPort)
         {
-            Debug.LogWarning("No GetValue(NodePort port) override defined for " + GetType());
+            //Debug.LogWarning("No GetValue(NodePort port) override defined for " + GetType());
+            return null;
+        }
+
+        /// <summary> Returns a value based on requested port output. Should be overridden in all derived nodes with outputs. </summary>
+        /// <param name="port">The requested port.</param>
+        /// <param name="port">The requested ports connected calling port.</param>
+        public virtual object[] GetValueSet(NodePort port, NodePort callerPort)
+        {
+            //Debug.LogWarning("No GetValueSet(NodePort port) override defined for " + GetType());
+            return null;
+        }
+
+        public object[] GetInputValueSet(string fieldName)
+        {
+            NodePort port = GetPort(fieldName);
+            if (port != null && port.IsConnected)
+            {
+                return port.GetInputValueSet();
+            }
+
             return null;
         }
 #endregion

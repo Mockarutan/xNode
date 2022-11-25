@@ -86,7 +86,7 @@ namespace XNodeEditor {
 #endif
             if (target.GetType().HasSortedOutputNodes())
             {
-                var ports = target.DynamicPorts.ToList().OrderBy(e => e.fieldName);
+                var ports = target.DynamicPorts.ToList().OrderBy(e => int.Parse(string.Concat(e.fieldName.Where(char.IsNumber))));
                 foreach (var port in ports)
                 {
                     NodeEditorGUILayout.PortField(port);

@@ -121,12 +121,33 @@ namespace XNode {
             return node.GetValue(this, callerPort);
         }
 
+        /// <summary> Return the output value set of this node through its parent nodes GetValue override method. </summary>
+        /// <returns> <see cref="Node.GetValue(NodePort)"/> </returns>
+        public object[] GetOutputValueSetInner(NodePort callerPort)
+        {
+            if (direction == IO.Input)
+                return null;
+
+            return node.GetValueSet(this, callerPort);
+        }
+
         /// <summary> Return the output value of the first connected port. Returns null if none found or invalid.</summary>
         /// <returns> <see cref="NodePort.GetOutputValue"/> </returns>
         public object GetInputValue() {
             NodePort connectedPort = Connection;
             if (connectedPort == null) return null;
             return connectedPort.GetOutputValue(this);
+        }
+
+        /// <summary> Return the output value of the first connected port. Returns null if none found or invalid.</summary>
+        /// <returns> <see cref="NodePort.GetOutputValue"/> </returns>
+        public object[] GetInputValueSet()
+        {
+            NodePort connectedPort = Connection;
+            if (connectedPort == null)
+                return null;
+
+            return connectedPort.GetOutputValueSetInner(this);
         }
 
         /// <summary> Return the output values of all connected ports. </summary>
