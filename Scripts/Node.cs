@@ -289,7 +289,9 @@ namespace XNode {
             foreach (NodePort port in Ports) port.ClearConnections();
         }
 
-#region Attributes
+        public virtual void ResetState() { }
+
+        #region Attributes
         /// <summary> Mark a serializable field as an input port. You can access this through <see cref="GetInputPort(string)"/> </summary>
         [AttributeUsage(AttributeTargets.Field)]
         public class InputAttribute : Attribute {
