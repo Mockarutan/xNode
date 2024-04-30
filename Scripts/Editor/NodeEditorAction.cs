@@ -542,6 +542,13 @@ namespace XNodeEditor {
             Vector2 mousePos = Event.current.mousePosition;
             //Get node position
             Vector2 nodePos = GridToWindowPosition(node.position);
+            foreach (var headerAux in NodeEditor.headerAuxPositions)
+            {
+                if (headerAux.Value.Contains(mousePos - nodePos))
+                    return false;
+            }
+
+            //Get node position
             float width;
             Vector2 size;
             if (nodeSizes.TryGetValue(node, out size)) width = size.x;

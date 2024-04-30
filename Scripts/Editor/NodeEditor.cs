@@ -20,6 +20,7 @@ namespace XNodeEditor {
         /// <summary> Fires every whenever a node was modified through the editor </summary>
         public static Action<XNode.Node> onUpdateNode;
         public readonly static Dictionary<XNode.NodePort, Vector2> portPositions = new Dictionary<XNode.NodePort, Vector2>();
+        public readonly static Dictionary<XNode.NodePort, Rect> headerAuxPositions = new Dictionary<XNode.NodePort, Rect>();
 
 #if ODIN_INSPECTOR
         protected internal static bool inNodeEditor = false;
